@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-6">
+    <h3><%= @brand.name() %></h3>
+    <form class="" action="brands/<%= @brand.id() %>/update_name" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <div class="form-group">
+        <label for="update_name"></label>
+        <input type="text" class="form-control" name="update_name"><%= @brand.name() %></input>
+      </div>
+      <button type="submit" class="btn btn-sm btn-danger">Update Name</button>
+    </form>
+    <hr>
+    <h4>Add Stores</h4>
+    <form class="" action="<%= @brand.id() %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <% @stores.each() do |store| %>
+      <div class="checkbox form-group">
+        <label>
+          <input type="checkbox" class="form-control" name="store_ids[]" value="<%= store.id() %>"><%= store.name() %>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-lg btn-success">Add Brands</button>
+    </form>
+  </div>
+</div>

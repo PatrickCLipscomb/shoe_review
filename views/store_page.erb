@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-xs-2">
+    <p>
+      <a href="/" class="btn btn-sm btn-primary">Return to Homepage</a>
+    </p>
+
+  </div>
+  <div class="col-xs-6">
+    <h3><%= @store.name() %></h3>
+    <form class="" action="/store/update_name" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <input type="hidden" name="store_id" value="<%= @store.id() %>">
+      <div class="form-group">
+        <label for="update_name"></label>
+        <textarea type="text" class="form-control" name="update_name"><%= @store.name() %></textarea>
+      </div>
+      <button type="submit" class="btn btn-sm btn-danger">Update Name</button>
+    </form>
+    <hr>
+    <h4>Add Brands</h4>
+    <form class="well" action="/store/brands" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <input type="hidden" name="store_id" value="<%= @store.id() %>">
+      <% @brands.each() do |brand| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" class="" name="brand_ids[]" value="<%= brand.id() %>"><%= brand.name() %>
+        </label>
+      </div>
+      <% end %>
+      <button type="submit" class="btn btn-success">Add Brands to <%= @store.name() %></button>
+    </form>
+  </div>
+  <div class="col-xs-3">
+    <h3>Brands already in <%= @store.name() %>:</h3>
+    <% if @brands_within %>
+      <ul class="list-group">
+        <% @brands_within.each() do |brand| %>
+          <li class="list-group-item"><%= brand.name() %>
+          <form class="" action="/stores/<%= @store.id() %>/brands/<%= brand.id() %>" method="post">
+            <input type="hidden" name="_method" value="patch">
+            <button type="submit" class="delete glyphicon glyphicon-remove pull-right"></button>
+          </form>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>
