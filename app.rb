@@ -39,3 +39,10 @@ post('/brands/new') do
   Brand.create({:name => params['new_brand']})
   redirect('/')
 end
+
+patch('/store/brand/delete') do
+  store = Store.find(params['store_id'].to_i)
+  brand = Brand.find(params['brand_id'].to_i)
+  store.brands.delete(brand)
+  redirect('/stores/' + store.id().to_s)
+end

@@ -37,8 +37,10 @@
       <ul class="list-group">
         <% @brands_within.each() do |brand| %>
           <li class="list-group-item"><%= brand.name() %>
-          <form class="" action="/stores/<%= @store.id() %>/brands/<%= brand.id() %>" method="post">
+          <form class="" action="/store/brand/delete" method="post">
             <input type="hidden" name="_method" value="patch">
+            <input type="hidden" name="store_id" value="<%= @store.id() %>">
+            <input type="hidden" name="brand_id" value="<%= brand.id() %>">
             <button type="submit" class="delete glyphicon glyphicon-remove pull-right"></button>
           </form>
           </li>
