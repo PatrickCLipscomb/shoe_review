@@ -16,7 +16,7 @@
       <button type="submit" class="btn btn-sm btn-danger">Update Name</button>
     </form>
     <hr>
-    <h3>Add Stores</h4>
+    <h3>Stores that hold <%= @brand.name() %>:</h4>
     <% if @stores.length != 0 %>
     <ul class="list-group">
       <% @stores.each() do |store| %>
