@@ -7,9 +7,8 @@
   </div>
   <div class="col-xs-6">
     <h3><%= @store.name() %></h3>
-    <form class="" action="/store/update_name" method="post">
+    <form class="" action="/stores/<%= @store.id() %>/update_name" method="post">
       <input type="hidden" name="_method" value="patch">
-      <input type="hidden" name="store_id" value="<%= @store.id() %>">
       <div class="form-group">
         <label for="update_name"></label>
         <textarea type="text" class="form-control" name="update_name"><%= @store.name() %></textarea>

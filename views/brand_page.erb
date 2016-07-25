@@ -1,25 +1,30 @@
 <div class="row">
-  <div class="col-xs-6 col-xs-offset-6">
+  <div class="col-xs-2">
+    <p>
+      <a href="/" class="btn btn-sm btn-primary">Return to Homepage</a>
+    </p>
+
+  </div>
+  <div class="col-xs-6 col-xs-offset-3">
     <h3><%= @brand.name() %></h3>
-    <form class="" action="brands/<%= @brand.id() %>/update_name" method="post">
+    <form class="" action="/brands/<%= @brand.id() %>/update_name" method="post">
       <input type="hidden" name="_method" value="patch">
       <div class="form-group">
         <label for="update_name"></label>
-        <input type="text" class="form-control" name="update_name"><%= @brand.name() %></input>
+        <textarea type="text" class="form-control" name="update_name"><%= @brand.name() %></textarea>
       </div>
       <button type="submit" class="btn btn-sm btn-danger">Update Name</button>
     </form>
     <hr>
-    <h4>Add Stores</h4>
-    <form class="" action="<%= @brand.id() %>" method="post">
-      <input type="hidden" name="_method" value="patch">
+    <h3>Add Stores</h4>
+    <% if @stores.length != 0 %>
+    <ul class="list-group">
       <% @stores.each() do |store| %>
-      <div class="checkbox form-group">
-        <label>
-          <input type="checkbox" class="form-control" name="store_ids[]" value="<%= store.id() %>"><%= store.name() %>
-        </label>
-      </div>
-      <button type="submit" class="btn btn-lg btn-success">Add Brands</button>
-    </form>
+        <li class="list-group-item"><strong><%= store.name %></strong></li>
+      <% end %>
+    </ul>
+    <% else %>
+      <h4>The <%= @brand.name %> is not currently in any stores.</h4>
+    <% end %>
   </div>
 </div>

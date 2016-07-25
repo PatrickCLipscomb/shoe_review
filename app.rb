@@ -15,10 +15,33 @@ get('/stores/:id') do
   erb(:store_page)
 end
 
-patch('/store/update_name') do
-  store = Store.find(params['store_id'].to_i)
-  name = params['update_name']
-  store.update({:name => name})
+get('/brands/:id') do
+  @brand = Brand.find(params['id'].to_i)
+  @stores = @brand.stores()
+  erb(:brand_page)
+end
+
+delete('/stores/:id') do
+  store = Store.find(params['id'].to_i)
+  store.delete
+  redirect('/')
+end
+
+delete('/brands/:id') do
+  brand = Brand.find(params['id'].to_i)
+  brand.delete
+  redirect('/')
+end
+
+patch('/brands/:id/update_name') do
+  brand = Brand.find(params['id'].to_i)
+  brand.update({:name => params['update_name']})
+  redirect('/brands/' + brand.id.to_s)
+end
+
+patch('/stores/:id/update_name') do
+  store = Store.find(params['id'].to_i)
+  store.update({:name => params['update_name']})
   redirect('/stores/' + store.id().to_s)
 end
 
